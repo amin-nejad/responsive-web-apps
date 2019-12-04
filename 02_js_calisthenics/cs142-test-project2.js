@@ -11,6 +11,7 @@
 var cs142MakeMultiFilter;
 var Cs142TemplateProcessor;
 
+(function () {
 
 // Result message for Problems 1-3
 var p1Message = 'SUCCESS';
@@ -164,3 +165,4 @@ window.onload = function () {
     document.getElementById("cs142p2").innerHTML = p2Message;
     document.getElementById("cs142p3").innerHTML = p3Message;
 };
+})();

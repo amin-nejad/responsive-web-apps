@@ -1,0 +1,1 @@
+Run `npm test` or open html file to check whether JS code is working correctly
