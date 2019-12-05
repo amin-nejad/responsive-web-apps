@@ -1,0 +1,37 @@
+.monthbutton{
+    font-family: Tahoma;
+    font-size: 30px;
+    color: black;
+}
+.monthbutton:hover {
+    cursor: pointer;
+  }
+.header{
+    font-family: Tahoma;
+    font-size: 30px;
+    color: teal;
+    font-weight: bold;
+    text-align: center;
+}
+.daysoftheweek{
+    font-family: Tahoma;
+    font-size: 20px;
+    color: turquoise;
+    font-weight: bold;
+}
+.inactivedate{
+    font-family: Tahoma;
+    font-size: 20px;
+    color: lightgrey;
+    text-align: center;
+}
+.selectdate{
+    font-family: Tahoma;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+}
+.selectdate:hover {
+    background: lightsalmon;
+    cursor: pointer;
+}

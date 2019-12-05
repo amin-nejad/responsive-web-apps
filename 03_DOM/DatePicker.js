@@ -12,7 +12,7 @@ function DatePicker(div_id, callback){
 DatePicker.prototype.prevMonth = function() {
 	var month = this.date.getMonth();
 	var year = this.date.getFullYear();
-	month = (month-1) % 12;
+	month = (month+11) % 12;
 	if (month === 11) {
 		year -= 1;
 	}
@@ -47,7 +47,6 @@ DatePicker.prototype.selectDate = function(selectedDate) {
 
 // Calendar rendering function
 DatePicker.prototype.render = function(date){
-    var that = this; // capturing context
     this.date = date;
     var currentDate = 1;
     var element = document.getElementById(this.div_id);
@@ -73,7 +72,6 @@ DatePicker.prototype.render = function(date){
     // ------------- CREATE THE ACTUAL CALENDAR -------------
 	var tableElem, tableRow, tableData;
 	tableElem = document.createElement('TABLE');
-	tableElem.setAttribute("class", "datepickertable");
 	element.appendChild(tableElem);
     
     // table rows
@@ -84,8 +82,8 @@ DatePicker.prototype.render = function(date){
     // previous month button
     var prevButton = document.createElement('TD');
 	prevButton.setAttribute("class", "monthbutton");
-	prevButton.onclick = function () { 
-		that.prevMonth();
+	prevButton.onclick = () => { 
+		this.prevMonth();
 	};
 	prevButton.innerHTML = "<";
     tableRow.appendChild(prevButton);
@@ -93,14 +91,15 @@ DatePicker.prototype.render = function(date){
     // header detailing current month and year
 	var datepickerheader = document.createElement('TD');
 	datepickerheader.setAttribute("colspan", "5");
+	datepickerheader.setAttribute("class", "header");
 	datepickerheader.innerHTML = header;
     tableRow.appendChild(datepickerheader);
     
     // next month button
 	var nextButton = document.createElement('TD');
 	nextButton.setAttribute("class", "monthbutton");
-	nextButton.onclick = function () { 
-		that.nextMonth();
+	nextButton.onclick = () => { 
+		this.nextMonth();
 	};
 	nextButton.innerHTML = ">";
 	tableRow.appendChild(nextButton);
@@ -139,20 +138,18 @@ DatePicker.prototype.render = function(date){
 			tableElem.appendChild(tableRow);
 		}
 		tableData = document.createElement('TD');
+		tableData.setAttribute("class", "selectdate");
 		tableRow.appendChild(tableData);
-		if (this.fixedDate && 
-			rMonth === this.fixedDate.month-1 && 
-			rYear === this.fixedDate.year && 
-			currentDate === this.fixedDate.day) {
-			tableData.setAttribute("class", "selectdate");
-        }
-        
 		tableData.innerHTML = currentDate;
+
+		// onclick callback
+		var that = this; // capturing context
 		tableData.onclick = (function (selectedDate) {
 			return function() {
 				that.selectDate(selectedDate);
 			};
 		})(currentDate);
+
 		currentDate += 1;
 		displayDate.setDate(currentDate);
     }
